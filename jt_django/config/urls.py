@@ -15,12 +15,13 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
-
-from pybo import views
+from django.urls import include, path
 
 urlpatterns = [
     # URL을 정규화하는 장고의 기능으로 URL 매핑 시 항상 끝에 슬래쉬를 붙여주는 게 좋음
     path("admin/", admin.site.urls),
-    path('pybo/', views.index),  # pybo URL 요청 시 views.py 파일의 index 함수 호출
+    path("pybo/", include("pybo.urls")),  # pybo URL 요청 시 pybo/urls.py 파일의 매핑 정보를 읽어서 처리
+    # config 하위의 urls 파일은 프로젝트 단위의 URL 매핑만 추가되어야 함
+    # 즉, pybo 로직을 처리할 때마다 config 하위의 urls 파일을 수정하면 안됨
+    # pybo 앱 단위의 URL 매핑은 pybo.urls로 변경
 ]

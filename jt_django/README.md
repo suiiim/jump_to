@@ -19,7 +19,7 @@
 ## Django (장고)
 
 ![장고 슬로건](https://wikidocs.net/images/page/78004/O_1-01_3.png)
- 
+
 - The web framework for perfectionists with deadlines.
 - 마감에 쫓기는 완벽주의자를 위한 웹 프레임워크
 - 마감 기한이 있어도 완벽하게 만들 수 있다는 의미
@@ -31,9 +31,9 @@
 ### 장고의 특징
 
 1. 튼튼한 보안
-   - SQL 인젝션, XSS, CSRF, 클릭재킹과 같은 보안 공격을 기본적으로 막아줌
+    - SQL 인젝션, XSS, CSRF, 클릭재킹과 같은 보안 공격을 기본적으로 막아줌
 2. 무수히 많은 기능
-   - 2005년부터 기능이 추가되고 다듬어짐 
+    - 2005년부터 기능이 추가되고 다듬어짐
 
 ### 장고 프로젝트 생성 및 시작
 
@@ -41,16 +41,16 @@
 django-admin startproject config .
 ```
 
-- 현재 디렉토리에 프로젝트를 생성 
-- 현재 디렉토리에 config라는 앱 디렉토리가 생성 
-- 장고가 필요로 하는 여러 디렉터리와 파일들이 생성됨 
-  - `conf/settings.py`
-    - 장고 설정 파일
-    - `LANGUAGE_CODE`: en-us -> ko-kr
-    - `TIME_ZONE`: UTC -> Asia/Seoul
-  - `conf/urls.py`
-    - URL 요청에 대한 응답 위치 매핑
-    - 페이지 요청이 발생하면 가장 먼처 호출되는 파일 
+- 현재 디렉토리에 프로젝트를 생성
+- 현재 디렉토리에 config라는 앱 디렉토리가 생성
+- 장고가 필요로 하는 여러 디렉터리와 파일들이 생성됨
+    - `conf/settings.py`
+        - 장고 설정 파일
+        - `LANGUAGE_CODE`: en-us -> ko-kr
+        - `TIME_ZONE`: UTC -> Asia/Seoul
+    - `conf/urls.py`
+        - URL 요청에 대한 응답 위치 매핑
+        - 페이지 요청이 발생하면 가장 먼처 호출되는 파일
 
 ```shell
 python manage.py runserver
@@ -68,9 +68,9 @@ django-admin startapp pybo
 ```
 
 - `startapp` 명령어를 이용하여 `pybo` 앱 생성
-- 현재 디렉토리 하위에 pybo라는 디렉토리가 생성됨 
-  - `pybo/views.py`
-    - Response 함수 작성 
+- 현재 디렉토리 하위에 pybo라는 디렉토리가 생성됨
+    - `pybo/views.py`
+        - Response 함수 작성
 
 ## 장고 개발 흐름
 
@@ -79,3 +79,8 @@ django-admin startapp pybo
 1. 브라우저에서 로컬 서버로 http://localhost:8000/pybo 페이지 요청
 2. urls.py 파일에서 /pybo URL 매핑을 확인 후 views.py 파일의 index 함수 호출
 3. 호출한 결과를 브라우저에 반영
+
+| config/urls.py | +   | pybo/urls.py       | =   | 최종 URL                  |
+|----------------|-----|--------------------|-----|-------------------------|
+| 'pybo/'        | +   | ''                 | =   | 'pybo/'                 |
+| 'pybo/'        | +   | 'question/create/' | =   | 'pybo/question/create/' |
