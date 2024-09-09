@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% block content %}
+<!-- 질문 등록 -->
+<div class="container">
+  <h5 class="my-3 border-bottom pb-2">질문등록</h5>
+  <form method="post" class="my-3">
+    <!--
+      POST 방식으로 폼 데이터 전송
+      action 속성을 따로 정의하지 않으면 현재 페이지의 URL 이 default action 으로 설정
+      ex) <form method="post" action="{{ url_for('question.create') }} class="my-3">
+      action 을 따로 지정하지 않을 경우 동일한 템플릿으로 여러 기능들이 함께 사용 가능
+      즉, 질문 등록 및 질문 수정에서도 같이 사용 가능
+    -->
+
+    {{ form.csrf_token }}
+    <!-- 전송된 form 데이터가 실제 웹 사이트에서 만들어진 데이터인지 검증하는 데 필요한 CSRF 토큰 생성 -->
+
+    <!-- 오류표시 Start -->
+    {% if form.errors %}
+    <div class="alert alert-danger" role="alert">
+        {% for field, errors in form.errors.items() %}
+        <strong>{{ form[field].label }}</strong>
+        <ul>
+            {% for error in errors %}
+            <li>{{ error }}</li>
+            {% endfor %}
+        </ul>
+        {% endfor %}
+    </div>
+    {% endif %}
+    <!-- create 함수에서 form.validate_on_submit() 코드가 실패(false 반환)하면 폼에는 오류 내용이 자동으로 등록 -->
+    <!-- 오류표시 End -->
+
+    <div class="mb-3">
+      <!-- 질문 제목 -->
+      <label for="subject">제목</label>
+      <input type="text" class="form-control" name="SUBJECT" id="SUBJECT" value="{{ form.SUBJECT.data or '' }}">
+      <!--
+        value 태그는 폼을 전송했을 때 오류가 있더라도 값 유지 가능
+
+        form 객체를 사용하여 라벨을 표시하고 입력폼을 표시하는 방법
+        \{\{ form.SUBJECT.label \}\}
+        \{\{ form.SUBJECT(class="form-control")  \}\}
+        내가 원하는 디자인으로 적용 못함
+      -->
+    </div>
+    <div class="mb-3">
+      <!-- 질문 내용 -->
+      <label for="content">내용</label>
+      <textarea class="form-control" name="CONTENT" id="CONTENT" rows="10">{{ form.CONTENT.data or '' }}</textarea>
+    <!--
+      form 객체를 사용하여 라벨을 표시하고 입력폼을 표시 하는 방법
+      \{\{ form.CONTENT.label \}\}
+      \{\{ form.CONTENT(class="form-control") \}\}
+        내가 원하는 디자인으로 적용 못함
+    -->
+    </div>
+    <button type="submit" class="btn btn-primary">저장하기</button>
+    </br>
+  </form>
+</div>
+{% endblock %}
